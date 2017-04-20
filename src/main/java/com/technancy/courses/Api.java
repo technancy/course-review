@@ -74,6 +74,11 @@ public class Api {
                 return review;
             }, gson::toJson);
 
+            get("courses/:courseId/reviews", "application.json", (req, res) -> {
+                int courseId = Integer.parseInt(req.params("courseId"));
+                return reviewDao.findByCourseId(courseId);
+            }, gson::toJson);
+
             exception(ApiError.class, (exc, req, res) -> {
                 ApiError err = (ApiError) exc;
 
